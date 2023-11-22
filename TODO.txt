@@ -1,0 +1,2 @@
+// trouver les mécaniques de scoring et implémenter
+// utiliser pour nom des cartes : https://www.nomsdefantasy.com/mixed/short/?from=1
