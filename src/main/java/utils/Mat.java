@@ -91,7 +91,7 @@ public final class Mat {
 		return res;
 	}
 	
-	public static double[][] offsetVertices(int[] offset, double[][] verticesMat){
+	public static double[][] offsetVertices(double[] offset, int[][] verticesMat){
 		double[][] res = new double[verticesMat.length][verticesMat[0].length];
 		for(int row=0;row<res.length;row++){
 			for(int col=0;col<res[0].length;col++) {

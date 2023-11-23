@@ -10,6 +10,12 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import BasicForm.Cube;
+import BasicForm.SlantedPlaneFront;
+import BasicForm.SlantedPlaneLeft;
+import BasicForm.SlantedPlaneRight;
+import BasicForm.GraphicObject;
+import BasicForm.Renderer;
 import data.Card;
 import data.Deck;
 import data.Player;
@@ -18,7 +24,6 @@ import entity.BoardEntity;
 import entity.ButtonEntity;
 import entity.Entity;
 import entity.PlayerEntity;
-import graphicEngine.BaseCube;
 import graphicEngine.Board;
 import graphicEngine.Camera;
 
@@ -52,7 +57,8 @@ public class GamePanel extends JPanel implements Runnable {
 	private PlayerEntity playerEntity;
 	private Board _board;
 	private Camera _camera;
-	private GraphicWrapper graphicInfo;
+	private Renderer _renderer;
+	private GraphicWrapper _graphicInfo;
 	
 
 	
@@ -65,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setFocusable(true);
 		
 		board = new BoardEntity(this,keyH,mouseH);
-		_camera = new Camera(keyH,mouseH);
+		_camera = new Camera(keyH,mouseH,new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
 		
 		Player player = new Player(1);
 		playerEntity = new PlayerEntity(this, keyH, mouseH, player){
@@ -74,9 +80,8 @@ public class GamePanel extends JPanel implements Runnable {
 			}
 		};
 		
-		int[] pos = {0,0,0};
-		_board = new Board(50,50);
-		
+		_board = new Board(10,10);
+		_renderer = new Renderer(null, _camera);
 		
 	}
 
@@ -127,12 +132,26 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		graphicInfo= new GraphicWrapper(g2, new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
+		_graphicInfo= new GraphicWrapper(g2, new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
 		
 		//tileM.draw(g2);
 		//board.draw(g2);
 		
-		_board.draw(graphicInfo,_camera);
+		_renderer.setGraphic(_graphicInfo);
+		
+		//_board.draw(graphicInfo,_camera);
+		
+		Cube cube = new Cube(new double[] {0,0,0},new Color(129,185,48));
+		SlantedPlaneFront slantedFront = new SlantedPlaneFront(new double[] {0,3,0},new Color(129,185,48));
+		
+		SlantedPlaneLeft slantedLeft = new SlantedPlaneLeft(new double[] {3,0,0},new Color(129,185,48));
+		
+		SlantedPlaneRight slantedRight = new SlantedPlaneRight(new double[] {3,3,0},new Color(129,185,48));
+		
+		_renderer.draw(cube);
+		_renderer.draw(slantedFront);
+		_renderer.draw(slantedLeft);
+		_renderer.draw(slantedRight);
 
 		//validBtn.draw(g2);
 		

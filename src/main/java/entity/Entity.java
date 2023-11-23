@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import BasicForm.GraphicObject;
 import ihm.KeyHandler;
 import ihm.MouseHandler;
 
@@ -20,6 +21,8 @@ public abstract class Entity {
 	protected boolean hasFocus;
 	protected int typeEntity;
 	
+	protected GraphicObject[] _graphicObjects;
+	
 	protected KeyHandler _keyHandler;
 	protected MouseHandler _mouseHandler;
 	
@@ -27,6 +30,10 @@ public abstract class Entity {
 		_keyHandler = keyH;
 		_mouseHandler = mouseH;
 	};
+	
+	public GraphicObject[] getGraphicObjects() {
+		return _graphicObjects;
+	}
 	
 	public boolean isPointOnEntity(Point p) {
 		return false;
